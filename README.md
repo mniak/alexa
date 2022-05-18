@@ -20,7 +20,7 @@ Roadmap
 
 Nothing planned.
 
-Acknoledgements
+Acknowledgements
 ------------------
 
 Based on http://github.com/ericdaugherty/alexa-skills-kit-golang
