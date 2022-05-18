@@ -14,19 +14,19 @@ func (fn SkillEventFunc) toAlexaKitFunc() alexaKitSkillEventFunc {
 	return func(ctx context.Context, akreq *alexakit.Request, aksess *alexakit.Session, akactx *alexakit.Context, akresp *alexakit.Response) error {
 		var req *Request
 		if akreq != nil {
-			req = &Request{*akreq}
+			req = &Request{akreq}
 		}
 		var sess *Session
 		if aksess != nil {
-			sess = &Session{*aksess}
+			sess = &Session{aksess}
 		}
 		var actx *Context
 		if akactx != nil {
-			actx = &Context{*akactx}
+			actx = &Context{akactx}
 		}
 		var resp *Response
 		if akresp != nil {
-			resp = &Response{*akresp}
+			resp = &Response{akresp}
 		}
 		return fn(ctx, req, sess, actx, resp)
 	}

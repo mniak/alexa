@@ -33,7 +33,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 			resp.ShouldSessionEnd = true
 			return nil
 		}).
-		BuildHttpHandler()
+		BuildHTTPHandler()
 
 	handler(w, r)
 }

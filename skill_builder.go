@@ -5,18 +5,17 @@ import (
 	"net/http"
 
 	alexakit "github.com/ericdaugherty/alexa-skills-kit-golang"
-	"github.com/mniak/alexa/pkg/betterhandler"
 )
 
 type (
 	// Request contains the data in the request within the main request.
-	Request struct{ alexakit.Request }
+	Request struct{ *alexakit.Request }
 	// Response contains the body of the response.
-	Response struct{ alexakit.Response }
+	Response struct{ *alexakit.Response }
 	// Session contains the session data from the Alexa request.
-	Session struct{ alexakit.Session }
+	Session struct{ *alexakit.Session }
 	// Context contains the context data from the Alexa Request.
-	Context struct{ alexakit.Context }
+	Context struct{ *alexakit.Context }
 	// SkillEventFunc is an event handler funcion type
 	SkillEventFunc func(context.Context, *Request, *Session, *Context, *Response) error
 )
@@ -95,8 +94,8 @@ func (sb SkillBuilder) buildSkillHandler() skillFunc {
 	return skill.ProcessRequest
 }
 
-// BuildHttpHandler returns a HandlerFunc ready to process Skill requests
-func (sb SkillBuilder) BuildHttpHandler() http.HandlerFunc {
+// BuildHTTPHandler returns a HandlerFunc ready to process Skill requests
+func (sb SkillBuilder) BuildHTTPHandler() http.HandlerFunc {
 	skillHandler := sb.buildSkillHandler()
-	return betterhandler.Make(skillHandler)
+	return skillHandler.MakeHTTPHandler()
 }
